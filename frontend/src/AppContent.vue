@@ -38,6 +38,8 @@ const exThemeVars = computed(() => {
 // const preferences = ref({})
 // provide('preferences', preferences)
 
+const logoDefaultPaddingLeft = 10
+const logoMacPaddingLeft = 92
 const saveSidebarWidth = debounce(prefStore.savePreferences, 1000, { trailing: true })
 const handleResize = () => {
     saveSidebarWidth()
@@ -53,7 +55,7 @@ const logoWrapperWidth = computed(() => {
     return `${data.navMenuWidth + prefStore.behavior.asideWidth - 4}px`
 })
 
-const logoPaddingLeft = ref(10)
+const logoPaddingLeft = ref(isMacOS() ? logoMacPaddingLeft : logoDefaultPaddingLeft)
 const maximised = ref(false)
 const hideRadius = ref(false)
 const wrapperStyle = computed(() => {
@@ -86,9 +88,9 @@ const spinStyle = computed(() => {
 const onToggleFullscreen = (fullscreen) => {
     hideRadius.value = fullscreen
     if (fullscreen) {
-        logoPaddingLeft.value = 10
+        logoPaddingLeft.value = logoDefaultPaddingLeft
     } else {
-        logoPaddingLeft.value = isMacOS() ? 70 : 10
+        logoPaddingLeft.value = isMacOS() ? logoMacPaddingLeft : logoDefaultPaddingLeft
     }
 }
 
